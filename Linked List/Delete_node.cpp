@@ -17,41 +17,27 @@ void printList(Node *n)
     }
 }
 
-void push(Node **head, int data) // TC - O(1)
+void deletion( Node **head_ref, int data)
 {
-    Node *new_node = new Node();
-    new_node->data = data;
-    new_node->next = (*head);
-    (*head) = new_node;
-}
-
-void insertAfter(Node *prev_node, int data) // O(1)
-{
-    Node *new_node = new Node();
-    new_node->data = data;
-    new_node->next = prev_node->next;
-    prev_node->next = new_node;
-}
-
-void insertend(Node **head_ref, int data) // O(n)
-{
-    Node *new_node = new Node();
-    Node *last = *head_ref;
-    new_node->data = data;
-    new_node->next = NULL;
-
-   if(*head_ref == NULL)
-   {
-       *head_ref = new_node;
-       return;
-   }
-   while (last->next != NULL)
-        last = last->next;
-
-       last->next = new_node;
-       return;
-   
-    
+    Node *temp = *head_ref;
+    Node *prev = NULL;
+    if(temp != NULL && temp->data == data)
+    {
+        *head_ref = temp->next;
+        delete temp;
+        return;
+    }
+    else{
+        while(temp != NULL && temp->data != data)
+        {
+            prev = temp;
+            temp = temp->next;
+        }
+        if(temp == NULL)
+            return;
+        prev->next = temp->next;
+        delete temp;
+    }
 }
 int main()
 {
@@ -71,10 +57,7 @@ int main()
 
     printList(head);
     cout<<"\n";
-    push(&head, 78);
-    insertAfter(third, 89);
-    insertend(&head, 56);
-
+    deletion(&head, 3);
     printList(head);
     return 0;
 }
