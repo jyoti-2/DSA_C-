@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int SubarraySum(vector<int> v, int k)
+int SubarraySum(vector<int> v,int k)
 {  
     int sum = 0;
     int n = v.size();
